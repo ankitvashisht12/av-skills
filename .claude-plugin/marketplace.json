@@ -1,0 +1,14 @@
+{
+  "name": "av-skills",
+  "owner": { "name": "Ankit Vashisht", "url": "https://github.com/ankitvashisht12" },
+  "description": "Marketplace for av-skills.",
+  "plugins": [
+    {
+      "name": "av-skills",
+      "source": "./",
+      "description": "Evidence-based code review, codebase explainers, explainer videos, feature testing, and post promotion.",
+      "category": "engineering",
+      "keywords": ["code-review", "explainers", "skills"]
+    }
+  ]
+}

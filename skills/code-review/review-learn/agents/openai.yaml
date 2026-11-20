@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Learn"
+  short_description: "Propose review rules from human comments that a review missed"
+  default_prompt: "Use $review-learn to compare the earlier review of this merged PR with its human comments and propose rule changes."

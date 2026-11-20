@@ -1,0 +1,10 @@
+[
+  {"id": "overview", "title": "The whole path", "lines": [
+    "We follow one customer chat through the whole path.",
+    "Blue steps run by themselves. Amber steps need a person."
+  ]},
+  {"id": "step-one", "title": "Step 1 · What starts it", "lines": [
+    "Step one. Every 2 hours, the system checks each agent for new chats.",
+    "If there is nothing new, the run does not start."
+  ]}
+]

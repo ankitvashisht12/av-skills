@@ -1,0 +1,18 @@
+{
+  "name": "av-skills",
+  "version": "0.1.0",
+  "description": "Ankit Vashisht's agent skills: evidence-based code review, codebase explainers, explainer videos, feature testing, and post promotion.",
+  "author": { "name": "Ankit Vashisht", "url": "https://github.com/ankitvashisht12" },
+  "repository": "https://github.com/ankitvashisht12/av-skills",
+  "license": "MIT",
+  "keywords": ["code-review", "explainers", "skills"],
+  "skills": [
+    "./skills/code-review/ultimate-review",
+    "./skills/code-review/review-learn",
+    "./skills/explain/explain-it",
+    "./skills/explain/flow",
+    "./skills/explain/pr-explainer-videos",
+    "./skills/workflow/automated-testing",
+    "./skills/writing/share-it"
+  ]
+}

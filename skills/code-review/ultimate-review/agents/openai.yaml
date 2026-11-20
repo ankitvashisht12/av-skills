@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ultimate Review"
+  short_description: "Evidence-based PR reviews with focused repeat checks"
+  default_prompt: "Use $ultimate-review to review this pull request and its existing discussion."

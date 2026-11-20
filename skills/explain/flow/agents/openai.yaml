@@ -1,0 +1,4 @@
+interface:
+  display_name: "Flow"
+  short_description: "Create clear interactive code journeys"
+  default_prompt: "Create a Flow explainer for this repository or feature."

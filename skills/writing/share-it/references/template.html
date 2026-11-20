@@ -1,0 +1,200 @@
+<!doctype html>
+<!--
+  share-it template. Copy this file, then:
+    · replace {{POST_TITLE}}, {{POST_URL}}, {{KIND}}, {{DATE}}
+    · keep one <section class="card"> per platform, delete the rest
+    · put each draft inside its <pre class="draft"> EXACTLY as it should paste
+    · set data-limit on the <pre> to that platform's character cap (omit if none)
+    · set the badge class to ok / warn / reject and write the score
+  Character counts and copy buttons are wired by the script — do not hand-count.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>share · {{POST_TITLE}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem("share-it-theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+:root{
+  color-scheme:light;
+  --primary:#c2603d; --accent-50:#f8f3ef; --accent-100:#f3e8e1; --accent-700:#9c4a2c;
+  --bg:#faf9f5; --surface:#fff; --border:#e6e2d8; --border-subtle:#f0ece2;
+  --text:#1f1e1c; --text-2:#46443f; --text-3:#75726a;
+  --green-50:#eaf4ec; --green-700:#2f6b45; --good-border:#c3ddcb;
+  --red-50:#fbeeea; --red-700:#a8412a;
+  --amber-50:#fbf1de; --amber-700:#8a6220; --warn-border:#e8d4a8;
+  --sans:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --primary:#d97757; --accent-50:#282521; --accent-100:#33302a; --accent-700:#e8a184;
+  --bg:#1c1a17; --surface:#232019; --border:#3a352d; --border-subtle:#2c2822;
+  --text:#f2efe7; --text-2:#c8c3b6; --text-3:#928c7e;
+  --green-50:#1e2b22; --green-700:#7fc79b; --good-border:#33503d;
+  --red-50:#2e1f1b; --red-700:#e0917a;
+  --amber-50:#2d2618; --amber-700:#dfb976; --warn-border:#4d4028;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --primary:#d97757; --accent-50:#282521; --accent-100:#33302a; --accent-700:#e8a184;
+  --bg:#1c1a17; --surface:#232019; --border:#3a352d; --border-subtle:#2c2822;
+  --text:#f2efe7; --text-2:#c8c3b6; --text-3:#928c7e;
+  --green-50:#1e2b22; --green-700:#7fc79b; --good-border:#33503d;
+  --red-50:#2e1f1b; --red-700:#e0917a;
+  --amber-50:#2d2618; --amber-700:#dfb976; --warn-border:#4d4028;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.65 var(--sans);
+     -webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px}
+header{border-bottom:1px solid var(--border);padding-bottom:28px;margin-bottom:36px;
+       display:flex;gap:20px;align-items:flex-start;justify-content:space-between}
+h1{font:400 38px/1.15 var(--serif);letter-spacing:-.01em;margin:0 0 8px}
+h1 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--border)}
+h1 a:hover{border-color:var(--primary)}
+.meta{color:var(--text-3);font-size:13.5px;margin:0}
+.meta code{font:500 12.5px var(--mono);color:var(--accent-700);background:var(--accent-50);
+           padding:1px 6px;border-radius:4px}
+.themebtn{flex:none;border:1px solid var(--border);background:var(--surface);color:var(--text-2);
+          border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:14px;line-height:1}
+.themebtn:hover{border-color:var(--primary);color:var(--primary)}
+.themebtn::before{content:"☾"}
+:root[data-theme="dark"] .themebtn::before{content:"☀"}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .themebtn::before{content:"☀"}}
+
+.note{background:var(--accent-50);border:1px solid var(--border-subtle);border-radius:10px;
+      padding:12px 16px;font-size:14px;color:var(--text-2);margin:0 0 32px}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;
+      padding:20px 22px;margin:0 0 20px}
+.card.is-reject{opacity:.72}
+.chead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+.chead h2{font:400 22px/1.2 var(--serif);margin:0;flex:1 1 auto}
+.badge{font:600 11px/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;
+       padding:5px 9px;border-radius:999px;border:1px solid}
+.badge.ok{background:var(--green-50);color:var(--green-700);border-color:var(--good-border)}
+.badge.warn{background:var(--amber-50);color:var(--amber-700);border-color:var(--warn-border)}
+.badge.reject{background:var(--red-50);color:var(--red-700);border-color:var(--red-700)}
+.count{font:500 12px var(--mono);color:var(--text-3)}
+.count.over{color:var(--red-700)}
+.why{color:var(--text-3);font-size:13.5px;margin:0 0 14px}
+
+pre.draft{background:var(--bg);border:1px solid var(--border-subtle);border-radius:8px;
+          padding:16px;margin:0 0 12px;font:400 14px/1.6 var(--mono);
+          white-space:pre-wrap;word-wrap:break-word;overflow-x:auto}
+pre.draft.small{font-size:13px;color:var(--text-2)}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+button.copy{font:500 13px var(--sans);border:1px solid var(--border);background:var(--surface);
+            color:var(--text-2);border-radius:7px;padding:7px 13px;cursor:pointer}
+button.copy:hover{border-color:var(--primary);color:var(--primary)}
+button.copy.done{background:var(--green-50);border-color:var(--good-border);color:var(--green-700)}
+a.go{font:500 13px var(--sans);color:var(--primary);text-decoration:none;padding:7px 4px}
+a.go:hover{text-decoration:underline}
+
+details{margin-top:14px;border-top:1px solid var(--border-subtle);padding-top:12px}
+summary{cursor:pointer;font-size:13.5px;color:var(--text-3)}
+summary:hover{color:var(--primary)}
+details ul{margin:10px 0 0;padding-left:20px;font-size:14px;color:var(--text-2)}
+details li{margin-bottom:5px}
+footer{margin-top:48px;color:var(--text-3);font-size:13px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1><a href="{{POST_URL}}">{{POST_TITLE}}</a></h1>
+    <p class="meta">classified <code>{{KIND}}</code> · drafted {{DATE}} · each draft written, graded by a separate critic, and revised</p>
+  </div>
+  <button class="themebtn" id="theme" aria-label="toggle theme"></button>
+</header>
+
+<p class="note"><strong>Drip, don't blast.</strong> {{DRIP_LINE}}</p>
+
+<!-- ── one card per platform; recommended first ────────────────────── -->
+
+<section class="card">
+  <div class="chead">
+    <h2>LinkedIn</h2>
+    <span class="badge ok">pass 8/10</span>
+    <span class="count" data-for="d-linkedin"></span>
+  </div>
+  <p class="why">{{ONE_LINE_ON_ANGLE_AND_TIMING}}</p>
+
+  <pre class="draft" id="d-linkedin" data-limit="3000">{{DRAFT}}</pre>
+
+  <div class="actions">
+    <button class="copy" data-copy="d-linkedin">Copy post</button>
+    <button class="copy" data-copy="d-linkedin-c">Copy first comment</button>
+    <a class="go" href="https://www.linkedin.com/feed/" target="_blank" rel="noopener">open ↗</a>
+  </div>
+
+  <pre class="draft small" id="d-linkedin-c">{{FIRST_COMMENT_WITH_URL}}</pre>
+
+  <details>
+    <summary>2 nits from the grader</summary>
+    <ul><li>{{NIT}}</li><li>{{NIT}}</li></ul>
+  </details>
+</section>
+
+<!-- REJECT example — keep the card, show the reason, no copy button -->
+<section class="card is-reject">
+  <div class="chead">
+    <h2>Hacker News</h2>
+    <span class="badge reject">reject</span>
+  </div>
+  <p class="why">{{ONE_LINE_REASON_NOT_TO_POST}}</p>
+</section>
+
+<footer>generated by <strong>share-it</strong> · nothing here has been posted</footer>
+</div>
+
+<script>
+// char counts — never hand-counted
+document.querySelectorAll(".count[data-for]").forEach(function(el){
+  var pre = document.getElementById(el.dataset.for);
+  if(!pre) return;
+  var n = pre.textContent.length, lim = parseInt(pre.dataset.limit||"0",10);
+  el.textContent = lim ? n+" / "+lim : n+" chars";
+  if(lim && n>lim) el.classList.add("over");
+});
+
+// copy the raw text exactly — plain string, never rich clipboard
+function copyText(s){
+  if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(s);
+  // fallback: some browsers refuse the async clipboard on file://
+  var ta = document.createElement("textarea");
+  ta.value = s; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); } finally { ta.remove(); }
+  return Promise.resolve();
+}
+document.querySelectorAll("button.copy").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var pre = document.getElementById(btn.dataset.copy);
+    if(!pre) return;
+    copyText(pre.textContent).then(function(){
+      var was = btn.textContent;
+      btn.textContent = "copied ✓"; btn.classList.add("done");
+      setTimeout(function(){ btn.textContent = was; btn.classList.remove("done"); }, 1400);
+    });
+  });
+});
+
+document.getElementById("theme").addEventListener("click", function(){
+  var cur = document.documentElement.dataset.theme ||
+    (matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light");
+  var next = cur === "dark" ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try{ localStorage.setItem("share-it-theme", next); }catch(e){}
+});
+</script>
+</body>
+</html>
