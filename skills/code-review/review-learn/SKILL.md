@@ -1,6 +1,8 @@
 ---
 name: review-learn
 description: After a PR merges, compare an earlier automated review (ultimate-review or a repository-specific review skill) with the human review comments, find the important issues the review missed, and propose rule additions or updates for the repository docs or the review skill. Proposals only; nothing is edited, committed, or posted without approval. Use for "learn from PR N", "what did the review miss", or "update the review rules".
+metadata:
+  version: "2"
 ---
 
 # Review learn
@@ -13,8 +15,8 @@ Do not edit, commit, push, comment, or post. Write one proposal file and stop. T
 
 For each PR the user names:
 
-- The earlier review. Use the review record at `git rev-parse --git-path review-state` for that skill and PR, or a review file the user gives. If no review exists, say so and ask whether to run a blind review at the head that the first human review saw. Do not compare against a review made after the human comments, because that review may have used the comments.
-- All human review data: review submissions, inline threads with replies, conversation comments, and resolved state. Handle pagination. Skip bots and the PR author, but keep an author reply that confirms or rejects a comment.
+- The earlier review. First look for PR comments whose body starts with `<!-- ai-review`; they are the posted AI review, and the marker gives the skill, version, finding ID, and head. Otherwise use the review record at `git rev-parse --git-path review-state` for that skill and PR, or a review file the user gives. If no review exists, say so and ask whether to run a blind review at the head that the first human review saw. Do not compare against a review made after the human comments, because that review may have used the comments.
+- All human review data: review submissions, inline threads with replies, conversation comments, and resolved state. Handle pagination. Skip bots, the PR author, and every comment whose body has the `<!-- ai-review` marker or the `🤖 ... (AI review)` label, even when a human account posted it. Keep an author reply that confirms or rejects a comment. A human reply in an AI thread is human data.
 - The commit each comment was made on (`original_commit_id`), and the later commits that changed that area.
 
 ## 2. Keep only confirmed, important issues
